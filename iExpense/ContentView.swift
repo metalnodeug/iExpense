@@ -39,8 +39,8 @@ class Expenses: ObservableObject {
 
 struct Design: ViewModifier {
     func body(content: Content) -> some View {
-    content
-        .font(.title)
+        content
+            .font(.title)
     }
 }
 
@@ -68,7 +68,7 @@ struct ContentView: View {
 
                         Spacer()
                         Text("$\(item.amount)")
-                        .design()
+                            .design()
                             .foregroundColor(self.colorDesign(amount: item.amount))
                     }
                 }
@@ -90,9 +90,12 @@ struct ContentView: View {
     //Adding color design
     func colorDesign(amount: Int) -> Color {
         switch amount {
-        case 0..<11: return .green
-        case 11..<101: return .orange
-        case 101...Int.max: return .red
+        case 0..<11:
+            return .green
+        case 11..<101:
+            return .orange
+        case 101...Int.max:
+            return .red
         default:
             break
         }
