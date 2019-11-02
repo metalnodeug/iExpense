@@ -90,9 +90,9 @@ struct ContentView: View {
     //Adding color design
     func colorDesign(amount: Int) -> Color {
         switch amount {
-        case 0..<10: return .green
-        case 10..<100: return .orange
-        case 100...Int.max: return .red
+        case 0..<11: return .green
+        case 11..<101: return .orange
+        case 101...Int.max: return .red
         default:
             break
         }
