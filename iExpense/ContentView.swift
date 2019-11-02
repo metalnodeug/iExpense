@@ -41,6 +41,7 @@ struct Design: ViewModifier {
     func body(content: Content) -> some View {
     content
         .foregroundColor(Color.red)
+        .font(.title)
     }
 }
 
