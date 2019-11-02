@@ -32,15 +32,29 @@ class Expenses: ObservableObject {
                 return
             }
         }
-        
+
         self.items = []
     }
+}
+
+struct Design: ViewModifier {
+    func body(content: Content) -> some View {
+    content
+        .foregroundColor(Color.red)
+    }
+}
+
+extension View {
+    func design() -> some View {
+        self.modifier(Design())
+    }
+
 }
 
 struct ContentView: View {
     @ObservedObject var expenses = Expenses()
     @State private var showingAddExpense = false
-    
+
     var body: some View {
         NavigationView {
             List {
@@ -51,9 +65,10 @@ struct ContentView: View {
                                 .font(.headline)
                             Text(item.type)
                         }
-                        
+
                         Spacer()
                         Text("$\(item.amount)")
+                        .design()
                     }
                 }
                 .onDelete(perform: removeItems)
