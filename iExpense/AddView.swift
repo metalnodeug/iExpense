@@ -14,9 +14,10 @@ struct AddView: View {
     @State private var name = ""
     @State private var type = "Personal"
     @State private var amount = ""
-
+    @State private var showingAlert = false
+    
     static let types = ["Business", "Personal"]
-
+    
     var body: some View {
         NavigationView {
             Form {
@@ -31,13 +32,22 @@ struct AddView: View {
             }
             .navigationBarTitle("Add new expense")
             .navigationBarItems(trailing: Button("Save") {
-                if let actualAmount = Int(self.amount) {
-                    let item = ExpenseItem(name: self.name, type: self.type, amount: actualAmount)
-                    self.expenses.items.append(item)
-                    self.presentationMode.wrappedValue.dismiss()
+                if let actualAmount = Int(self.amount){
+                    if self.isNumber() {
+                        let item = ExpenseItem(name: self.name, type: self.type, amount: actualAmount)
+                        self.expenses.items.append(item)
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
                 }
             })
         }
+    }
+    
+    func isNumber() -> Bool {
+        if amount.count > 0 {
+            return true
+        }
+        return false
     }
 }
 
