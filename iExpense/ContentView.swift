@@ -40,7 +40,6 @@ class Expenses: ObservableObject {
 struct Design: ViewModifier {
     func body(content: Content) -> some View {
     content
-        .foregroundColor(Color.red)
         .font(.title)
     }
 }
@@ -70,6 +69,7 @@ struct ContentView: View {
                         Spacer()
                         Text("$\(item.amount)")
                         .design()
+                            .foregroundColor(self.colorDesign(amount: item.amount))
                     }
                 }
                 .onDelete(perform: removeItems)
@@ -86,6 +86,19 @@ struct ContentView: View {
             }
         }
     }
+
+    //Adding color design
+    func colorDesign(amount: Int) -> Color {
+        switch amount {
+        case 0..<10: return .green
+        case 10..<100: return .orange
+        case 100...Int.max: return .red
+        default:
+            break
+        }
+        return .black
+    }
+
     func removeItems(at offsets: IndexSet) {
         expenses.items.remove(atOffsets: offsets)
     }}
